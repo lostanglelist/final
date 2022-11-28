@@ -1,0 +1,180 @@
+﻿@model logintest.Models.Order
+
+
+<body class="appear-animate" style="background-color:white">
+
+
+
+    <main id="main">
+
+
+        <!-- Head Section -->
+        <section class="page-section bg-dark-alfa-50 parallax-3" data-background="/images/banners/banner.jpg">
+
+            <div class="relative container align-left">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Thank you for your order!</h1>
+ 
+                    </div>
+
+
+                </div>
+            </div>
+
+        </section>
+        <!-- End Head Section -->
+        <!-- Section -->
+        <section class="page-section">
+            <div class="container">
+
+                <CENTER> <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">RECEIPT</h1> </CENTER>
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+
+                            <div class="table-responsive">
+                                <table class="table table-striped shopping-cart-table">
+                                    <tr>
+                                        <th>
+                                            <center>
+                                            Order Id
+                                            </center>
+                                        </th>
+                                        <th>
+                                            <center>
+                                            Product Image
+                                            </center>
+                                            
+                                        </th>
+                                        <th>
+                                            <center>
+                                            Product Name
+                                            </center>
+                                            
+                                        </th>
+                                        <th>
+                                            <center>
+                                            Q-ty
+                                            </center>
+                                            
+                                        </th>
+                                        <th>
+                                            <center>
+                                            Total
+                                            </center>
+                                            
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                    @foreach (var item in Model.OrderItems)
+                                    {
+                                        var ItemTotal = item.Price;
+                                    <tr>
+                                        <td>
+                                            <center><strong>@Model.Id</strong></center>
+                                        </td>
+                                            <td>
+                                            <center><img src="@("~/image/"+@item.VGAImage)" asp-append-version="true" style="height:4em;"></center>
+                                            </td>
+                                            <td>
+                                            <center>@item.VGAName</center>
+                                            </td>
+                                            <td>
+                                            <center><span class="badge badge-primary"> @item.Quantity</span></center>
+                                            </td>
+                                            <td>
+                                            <center>@ItemTotal.ToString("c")</center>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                </div>
+                                <div class="col-sm-4 text align-right">
+                                    <div>
+                                    <div class="lead mt-0 mb-30">
+                                        Order Total: <strong>@Model?.OrderTotal.ToString("c")</strong>
+                                    </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <hr class="mt-10 mb-60" />
+
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                    <h3 class="small-title font-alt">User Information</h3>
+
+                                    <form  class="form">
+
+                                        <div class="mb-10 post-prev-text">
+                                           Name : <span id="Name"></span>
+                                        </div>
+
+                                    <div class="mb-10 post-prev-text">
+                                           Phone : <span id="Phone"></span>
+                                        </div>
+
+                                    <div class="mb-10 post-prev-text">
+                                            Country : <span id="Country"></span>
+                                        </div>
+                                    <div class="mb-10 post-prev-text">
+                                        State : <span id="State"></span>
+                                    </div>
+                                    <div class="mb-10 post-prev-text">
+                                        Postcode/Zip : <span id="Zipcode"></span>
+                                    </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="col-sm-6 text align-right pt-10">
+
+                                    <div>
+                                        <a asp-controller="Home" asp-action="home" class="btn btn-mod btn-round btn-large">Back to Home </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                       
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Section -->
+
+    </main>
+</body>
+
+@section Scripts {
+    <script>
+        const Name = localStorage.getItem('Name');
+        const Country = localStorage.getItem('Country');
+        const Phone = localStorage.getItem('Phone');
+        const State = localStorage.getItem('State');
+        const Zipcode = localStorage.getItem('Zipcode');
+
+        document.getElementById('Name').textContent = Name;
+        document.getElementById('Country').textContent = Country;
+        document.getElementById('Phone').textContent = Phone;
+        document.getElementById('State').textContent = State;
+        document.getElementById('Zipcode').textContent = Zipcode;
+
+
+    </script>
+}

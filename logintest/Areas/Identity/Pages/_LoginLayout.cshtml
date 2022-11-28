@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+<body class="appear-animate" style="background-color:white">
+
+
+
+    <main id="main">
+
+
+        <!-- Head Section -->
+        <section class="page-section bg-dark-alfa-50 parallax-3" data-background="/images/Homepage/contact3.jpg">
+            <div class="relative container align-left">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Member</h1>
+                        <div class="hs-line-4 font-alt">
+                            Please accept our invitation to become a member of our website.
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Head Section -->
+        <section class="page-section">
+            <div class="container relative">
+            <!-- Nav Tabs -->
+            <div class="align-center mb-40 mb-xxs-30">
+                    <ul role="tablist" class="nav nav-tabs">
+
+                    <li>
+                        <a href='/Identity/Account/Login'  class="nav-link active"  aria-selected="true">Login</a>
+                    </li>
+
+                    <li>
+                        <a href='/Identity/Account/Register'  class="nav-link active" role="tab" aria-selected="false">Registration</a>
+                    </li>
+
+                </ul>
+                   
+                                @RenderBody()
+                            
+            </div>
+            </div>
+            <!-- End Nav Tabs -->
+        </section>
+        
+</main>
+</body>
+
+@section Scripts{
+    @RenderSection("Scripts", required: false)
+}

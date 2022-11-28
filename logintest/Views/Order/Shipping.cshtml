@@ -1,0 +1,106 @@
+﻿<body class="appear-animate" style="background-color:white">
+
+
+
+    <main id="main">
+
+
+        <!-- Head Section -->
+        <section class="page-section bg-dark-alfa-50 parallax-3" data-background="/images/banners/banner.jpg">
+
+            <div class="relative container align-left">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Shipping</h1>
+                        <div class="hs-line-4 font-alt">
+                            GPUs that are beyond fast for gamers and creators
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </section>
+        <!-- End Head Section -->
+        <section class="page-section">
+            <div class="container relative">
+                <div class="row">
+                    <div class="col-sm-6">
+
+                        <h3 class="small-title font-alt">Calculate Shipping</h3>
+
+                        <form id="form" class="form">
+
+                            <div class="mb-10">
+                                <input placeholder="Name" id="Name" class="input-md form-control" type="text" pattern=".{3,100}" />
+                            </div>
+
+                            <div class="mb-10">
+                                <input placeholder="Phone" id="Phone" class="input-md form-control" type="tel"  pattern=".{3,100}" />
+
+                            </div>
+
+                            <div class="mb-10">
+                                <input placeholder="Country" id="Country" class="input-md form-control" type="text" pattern=".{3,100}" />
+                            </div>
+
+                            <div class="mb-10">
+                                <input placeholder="State" id="State" class="input-md form-control" type="text" pattern=".{3,100}" />
+                            </div>
+
+                            <div class="mb-10">
+                                <input placeholder="Postcode / Zip" id="Zipcode" class="input-md form-control" type="text" pattern=".{3,100}" />
+                            </div>
+
+                            <br />
+                            <br />
+                            <div>
+                                <button type="submit" class="btn btn-mod btn-round btn-large btn-success" style="background-color:#222222e6; color:white;">Proceed to Checkout</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <div class="col-sm-6 text align-right pt-10">
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        </main>
+        </body>
+        @section Scripts{
+       
+<script>
+    const form = document.getElementById('form');
+    const Name = document.getElementById('Name');
+    const Country = document.getElementById('Country');
+    const Phone = document.getElementById('Phone');
+    const State = document.getElementById('State');
+    const Zipcode = document.getElementById('Zipcode');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const NameValue = Name.value;
+        const CountryValue = Country.value;
+        const PhoneValue = Phone.value;
+        const StateValue = State.value;
+        const ZipcodeValue = Zipcode.value;
+
+        localStorage.setItem('Name', NameValue);
+        localStorage.setItem('Country', CountryValue);
+        localStorage.setItem('Phone', PhoneValue);
+        localStorage.setItem('State', StateValue);
+        localStorage.setItem('Zipcode', ZipcodeValue);
+
+        window.location.href = "Checkout";
+    })
+</script>
+
+         }

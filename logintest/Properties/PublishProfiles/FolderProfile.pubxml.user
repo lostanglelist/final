@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Project\logintest\publish</_PublishTargetUrl>
+    <History>True|2022-11-28T21:12:17.1204358Z;True|2022-11-29T03:33:20.2286241+07:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DevConnection">
+      <Value>Server=%28local%29\sqlexpress%3bDatabase=logintest%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    </DestinationConnectionStrings>
+    <DestinationConnectionStrings Include="logintestDbContextConnection">
+      <Value>Server=%28local%29\sqlexpress%3bDatabase=logintest%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="DHSHOP.Models.ImageDbContext">
+      <Value>Server=%28local%29\sqlexpress%3bDatabase=logintest%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    </EFMigrations>
+    <EFMigrations Include="logintest.Data.logintestDbContext">
+      <Value>Server=%28local%29\sqlexpress%3bDatabase=logintest%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

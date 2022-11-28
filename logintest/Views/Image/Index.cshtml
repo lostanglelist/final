@@ -1,0 +1,330 @@
+﻿@model IEnumerable<logintest.Areas.Identity.Data.ImageModel>
+
+@{
+    ViewData["Title"] = "Shop Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Pager pager = new Pager();
+    int PageNo = 0;
+
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        PageNo = pager.CurrentPage;
+    }
+}
+
+<body class="appear-animate" style="background-color:white">
+
+
+
+    <main id="main">
+
+
+        <!-- Head Section -->
+        <section class="page-section bg-dark-alfa-50 parallax-3" data-background="/images/banners/banner.jpg">
+
+            <div class="relative container align-left">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Products List</h1>
+                        <div class="hs-line-4 font-alt">
+                            GPUs that are beyond fast for gamers and creators
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </section>
+        <!-- End Head Section -->
+        <!-- Section -->
+        <section class="page-section">
+            <div class="container relative">
+
+                <div class="row">
+
+                    <!-- Content -->
+                    <div class="col-sm-8">
+
+                        <!-- Shop options -->
+                        <div class="clearfix mb-40">
+
+                            <div class="right">
+
+
+                                <div class="tags">
+                                    <a asp-action="Index" asp-route-Sortby="@ViewData["PriceAscend"]">Price Descending</a>
+                                    <a asp-action="Index" asp-route-Sortby="@ViewData["PriceDescend"]">Price Ascending</a>
+                                    <a asp-action="Index" asp-route-Sortby="@ViewData["NameAscend"]">Name Descending</a>
+                                    <a asp-action="Index" asp-route-Sortby="@ViewData["NameDescend"]">Name Ascending</a>
+                                    <a asp-action="Index" asp-route-Sortby="@ViewData["Default"]">Default</a>
+                                </div>
+
+                                @*<form method="post" action="#" class="form">
+                                    <select class="input-md round">
+                                        <option>Default sorting</option>
+                                        <option>Sort by price: low to high</option>
+                                        <option>Sort by price: high to low</option>
+                                    </select>
+                                </form>*@
+                            </div>
+
+                            
+
+                        </div>
+                        <!-- End Shop options -->
+
+                        <div class="row multi-columns-row">
+                            @foreach (var item in Model)
+                            {
+                                <!-- Shop Item -->
+                                <div class="col-md-4 col-lg-4 mb-60 mb-xs-40">
+
+                                    <div class="post-prev-img">
+
+                                        <a asp-action="Details" asp-route-id="@item.ProductId" target="_blank"><img src="@("~/image/"+@item.ProductImage)" asp-append-version="true" style="width:200px !important; height:200px !important;"></a>
+
+
+                                    </div>
+
+                                    <div class="post-prev-title font-alt align-center">
+                                        <h5 class="font-alt mb-30 mb-xxs-10">@Html.DisplayFor(modelItem => item.ProductName)</h5>
+                                    </div>
+
+                                    <div class="post-prev-text align-center">
+                                        <p>
+                                            Product Price : @Html.DisplayFor(modelItem => item.ProductPrice) ฿
+                                        </p>
+                                    </div>
+
+                                    <div class="post-prev-more align-center">
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.ProductId" class="btn btn-mod btn-gray btn-round"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                                    </div>
+
+                                </div>
+                                <!-- End Shop Item -->
+                            }
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="pagination">
+                            @*<a href=""><i class="fa fa-angle-left"></i></a>
+                            <a href="" class="active">1</a>
+                            <a href="">2</a>
+                            <a href="">3</a>
+                            <a class="no-active">...</a>
+                            <a href="">9</a>
+                            <a href=""><i class="fa fa-angle-right"></i></a>*@
+                            @if (pager.TotalPages > 0)
+                            {
+                                <ul class="pagination justify-content-end">
+                                    @if (pager.CurrentPage > 1)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" asp-controller="Image" asp-action="Index" asp-route-pg="1">First</a>
+                                        </li>
+                                        <li>
+                                            <a class="page-link" asp-controller="Image" asp-action="Index" asp-route-pg="@(pager.CurrentPage-1)">Previous</a>
+                                        </li>
+                                    }
+
+                                    @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+                                    {
+                                        <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
+                                            <a class="page-link" asp-controller="Image" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                                        </li>
+                                    }
+
+                                    @if (pager.CurrentPage < pager.TotalPages)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" asp-controller="Image" asp-action="Index" asp-route-pg="@(pager.CurrentPage +1)">Next</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" asp-controller="Image" asp-action="Index" asp-route-pg="@(pager.TotalPages)">Last</a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </div>
+                        <!-- End Pagination -->
+
+                    </div>
+                    <!-- End Content -->
+                    <!-- Sidebar -->
+                    <div class="col-sm-4 col-md-3 offset-md-1 sidebar">
+
+
+                        <!-- Widget -->
+                        <div class="widget">
+
+                            <h5 class="widget-title font-alt">Search Products</h5>
+
+                            <div class="widget-body">
+
+                                @*<div class="left">
+
+                                <form asp-controller="Image" asp-action="Index">
+                                <div class="search-wrap">
+                                <input type="text" class="form-control search-field" name="SearchText" placeholder="Search...">
+                                <button class="search-button animate" type="submit" title="Start Search" value="Search">
+                                <i class="fa fa-search"></i>
+                                </button>
+                                </div>
+                                </form>
+
+                                </div>*@
+
+                                <form asp-controller="Image" asp-action="Index" method="get">
+
+                                    <div class="row mb-20">
+                                        <div class="search-wrap">
+                                            <input type="search" class="form-control search-field" value="@ViewData["SearchForDetails"]" name="search" placeholder="Search...">
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-mod btn-gray btn-round btn-full" style="font-size:11px !important;" type="submit" title="Start Search" value="Search"><i class="fa fa-search"></i> Search</button>
+
+                                </form>
+                            </div>
+
+                        </div>
+                        <!-- End Widget -->
+                        <!-- Widget -->
+                        <div class="widget">
+
+                            <h5 class="widget-title font-alt">Series</h5>
+
+                            @*<div class="widget-body">
+                            <ul class="clearlist widget-menu">
+                            <li>
+                            <a href="#" title="">Branding</a>
+                            <small>
+                            - 7
+                            </small>
+                            </li>
+                            <li>
+                            <a href="#" title="">Design</a>
+                            <small>
+                            - 15
+                            </small>
+                            </li>
+                            <li>
+                            <a href="#" title="">Development</a>
+                            <small>
+                            - 3
+                            </small>
+                            </li>
+                            <li>
+                            <a href="#" title="">Photography</a>
+                            <small>
+                            - 5
+                            </small>
+                            </li>
+                            <li>
+                            <a href="#" title="">Other</a>
+                            <small>
+                            - 1
+                            </small>
+                            </li>
+                            </ul>
+                            </div>*@
+                            <form method="get" asp-action="Index">
+                                <button name="Category" type="submit" value="QUADRO" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important;margin: 3px 3px !important;">NVIDIA QUADRO</button>
+                                <button name="Category" type="submit" value="16" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important;margin: 3px 3px !important;">NVIDIA GeForce 16 Series</button>
+                                <button name="Category" type="submit" value="30" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important;margin: 3px 3px !important;">NVIDIA GeForce 30 Series</button>
+                                <button name="Category" type="submit" value="40" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important;margin: 3px 3px !important;">NVIDIA GeForce 40 Series</button>
+                                <button name="Category" type="submit" value="AMD" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important; margin: 3px 3px !important;">AMD Radeon RX 6000 Series</button>
+                                @*<button name="Category" type="submit" value="ASUS" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important; margin: 3px 3px !important;">ASUS</button>
+                                <button name="Category" type="submit" value="ZOTAC" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important; margin: 3px 3px !important;">ZOTAC</button>
+                                <button name="Category" type="submit" value="Gigabyte" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important; margin: 3px 3px !important;">GIGABYTE</button>
+                                <button name="Category" type="submit" value="MSI" class="btn btn-mod btn-gray btn-round" style="font-size:11px !important; margin: 3px 3px !important;">MSI</button>*@
+                            </form>
+
+                        </div>
+                        <!-- End Widget -->
+                        <!-- Widget -->
+                        <div class="widget">
+
+                            <h5 class="widget-title font-alt">GPU Brand</h5>
+
+                            @*<div class="widget-body">
+                                <div class="tags">
+                                    <a href="">Design</a>
+                                    <a href="">Portfolio</a>
+                                    <a href="">Digital</a>
+                                    <a href="">Branding</a>
+                                    <a href="">Theme</a>
+                                    <a href="">Clean</a>
+                                    <a href="">UI & UX</a>
+                                    <a href="">Love</a>
+                                </div>
+                            </div>*@
+
+                            <form method="get" asp-action="Index">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="GPU" id="NvidiaCB" value="Nvidia">
+                                    <label class="form-check-label post-prev-text" for="NvidiaCB">Nvidia</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="GPU" id="AmdCB" value="AMD">
+                                    <label class="form-check-label post-prev-text" for="AmdCB">AMD</label>
+                                </div>
+                                <br />
+
+                               <h5 class="widget-title font-alt">Brand</h5>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Brand" id="AsusCB" value="Asus">
+                                    <label class="form-check-label post-prev-text" for="AsusCB">ASUS</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Brand" id="GalaxCB" value="Galax">
+                                    <label class="form-check-label post-prev-text" for="GalaxCB">GALAX</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Brand" id="GigabyteCB" value="Gigabyte">
+                                    <label class="form-check-label post-prev-text" for="GigabyteCB">GIGABYTE</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Brand" id="InnoCB" value="Inno">
+                                    <label class="form-check-label post-prev-text" for="InnoCB">INNO3D</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Brand" id="MSICB" value="MSI">
+                                    <label class="form-check-label post-prev-text" for="MSICB">MSI</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Brand" id="LeadtekCB" value="Leadtek">
+                                    <label class="form-check-label post-prev-text" for="LeadtekCB">LEADTEK</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Brand" id="PowerCB" value="Power">
+                                    <label class="form-check-label post-prev-text" for="PowerCB">POWER COLOR</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="Brand" id="ZotacCB" value="Zotac">
+                                    <label class="form-check-label post-prev-text" for="ZotacCB">ZOTAC</label>
+                                </div>
+                                <br />
+                                <input class="btn btn-mod btn-gray btn-round btn-full" type="submit" value="Submit" name="Submit" style="font-size:11px !important;">
+                            </form>
+
+
+                        </div>
+                        <!-- End Widget -->
+
+                    </div>
+                    <!-- End Sidebar -->
+                </div>
+
+            </div>
+        </section>
+        <!-- End Section -->
+
+    </main>
+</body>

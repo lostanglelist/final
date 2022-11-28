@@ -1,0 +1,64 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+
+<body class="appear-animate" style="background-color:white">
+
+
+
+    <main id="main">
+
+
+        <!-- Head Section -->
+        <section class="page-section bg-dark-alfa-50 parallax-3" data-background="/images/Homepage/contact1.jpg">
+
+            <div class="relative container align-left">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Account Settings</h1>
+                        <div class="hs-line-4 font-alt">
+                            CHANGE YOUR ACCOUNT SETTINS
+                        </div>
+                    </div>
+
+                    
+
+                    </div>
+                </div>
+
+        </section>
+        <!-- End Head Section -->
+
+        <section class="page-section">
+            <div class="container relative">               
+
+                <div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <partial name="_ManageNav" />
+                        </div>
+                        <div class="col-md-9">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </main>
+        </body>
+
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

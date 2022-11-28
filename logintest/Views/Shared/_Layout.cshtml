@@ -1,0 +1,201 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using logintest.Areas.Identity.Data
+
+@inject SignInManager<AccountUser> SignInManager
+@inject UserManager<AccountUser> UserManager
+
+<!DOCTYPE html>
+<!-- Change the value of lang="en" attribute if your website's language is not English.
+You can find the code of your language here - https://www.w3schools.com/tags/ref_language_codes.asp -->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rhythm &mdash; One & Multi Page Creative Template">
+    <meta charset="utf-8">
+    <meta name="author" content="https://themeforest.net/user/bestlooker/portfolio">
+    <title>@ViewData["Title"] - DHSHOP</title>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="~/images/logo/darkhouse_studio.png">
+
+    <!-- CSS -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/style-responsive.css" rel="stylesheet" />
+    <link href="~/css/animate.min.css" rel="stylesheet" />
+    <link href="~/css/vertical-rhythm.min.css" rel="stylesheet" />
+    <link href="~/css/owl.carousel.css" rel="stylesheet" />
+    <link href="~/css/magnific-popup.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+</head>
+<body class="appear-animate">
+<!-- Page Loader -->
+<div class="page-loader">
+    <div class="loader">Loading...</div>
+</div>
+<!-- End Page Loader -->
+<!-- Skip to Content -->
+<a href="#main" class="btn skip-to-content">Skip to Content</a>
+<!-- End Skip to Content -->
+
+<!-- Page Wrap -->
+<div class="page" id="top">
+
+    <!-- Navigation panel -->
+    <nav class="main-nav dark transparent stick-fixed">
+        <div class="full-wrapper relative clearfix">
+            <!-- Logo ( * your text or image into link tag *) -->
+            <div class="nav-logo-wrap local-scroll">
+                <a asp-controller="Home" asp-action="home" class="logo">
+                    <img src="~/images/logo/darkhouse_studiowhite.png" />
+                </a>
+            </div>
+            <div class="mobile-nav" role="button" tabindex="0">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Menu</span>
+            </div>
+            <!-- Main Menu -->
+            <div class="inner-nav desktop-nav">
+                <ul class="clearlist scroll-nav local-scroll">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="active">
+                            <a id="manage" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                        </li>
+                        <li class="active">
+                            <a>
+                                <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("home", "Home", new { area = "" })">
+                                    <button class="btn btn-mod btn-round btn-color" style="font-size:10px !important;" id="logout" type="submit">Logout</button>
+                                </form>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {                     
+                        <li class="active">
+                            @*<a class="btn btn-mod btn-round btn-color" style="font-size:10px !important; id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>*@
+                            <a>
+                                <form asp-area="Identity" asp-page="/Account/Login" id="login">
+                                    <button class="btn btn-mod btn-round btn-color" style="font-size:10px !important;"  type="submit">Login</button>
+                                </form>
+                            </a>
+
+                        </li>
+                    }
+                </ul>
+                <ul class="clearlist scroll-nav local-scroll">
+                        <li class="active"><a asp-controller="Cart" asp-action="Index"><i class="fa fa-shopping-cart"> Cart</i></a></li>                       
+                </ul>
+
+                <ul class="clearlist scroll-nav local-scroll">
+                    <li class="active"><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                </ul>
+
+                <ul class="clearlist scroll-nav local-scroll">
+                    <li class="active"><a asp-controller="Image" asp-action="Index">Shop</a></li>
+                </ul>
+
+                <ul class="clearlist scroll-nav local-scroll">
+                    <li class="active"><a asp-controller="Home" asp-action="About">About</a></li>
+                </ul>
+
+                <ul class="clearlist scroll-nav local-scroll">
+                    <li class="active"><a asp-controller="Home" asp-action="home">Home</a></li>
+                </ul>
+
+                
+
+            </div>
+        </div>
+    </nav>
+    <!-- End Navigation panel -->
+</div>
+
+<div>
+    <main role="main">
+        @RenderBody()
+    </main>
+</div>
+
+<!-- footer -->
+<section class="page-section" style="background-color:#3b087b !important">
+    <div class="container relative">
+
+        <div class="row mb-60 mb-xs-40">
+            <!-- Social Links -->
+            <center>
+                <img src="~/images/logo/darkhouse_studiowhite.png" style="width:130px; height:130px;">
+                <br /><br />
+                <div class="footer-social-links mb-110 mb-xs-60">
+                    <a href="https://www.facebook.com/wachira.pach/" title="Facebook" target="_blank"><i class="fa fa-facebook" style="color:black !important;"></i> <span class="sr-only">Facebook profile</span></a>
+                    <a href="https://www.facebook.com/PoySorravich" title="Facebook" target="_blank"><i class="fa fa-facebook" style="color:black !important;"></i> <span class="sr-only">Facebook profile</span></a>
+
+                </div>
+            </center>
+            <!-- End Social Links -->
+            <!-- Footer Text -->
+            <div class="footer-text">
+                <center>
+                    <!-- Copyright -->
+                    <div class="footer-copy font-alt">
+                        <a href="#" target="_blank" style="text-decoration:none !important; color:white !important;">© DARK HOUSE 2022</a>.
+                    </div>
+                    <!-- End Copyright -->
+                    <br />
+                    <div class="footer-made">
+                        Made with love for great people.
+                    </div>
+                </center>
+
+            </div>
+            <!-- End Footer Text -->
+
+        </div>
+    </div>
+
+    <!-- Top Link -->
+    <div class="local-scroll">
+        <a href="#top" class="link-to-top"><i class="fa fa-caret-up" style="color:white !important;"></i><span class="sr-only">Scroll to top</span></a>
+    </div>
+    <!-- End Top Link -->
+</section>
+<!-- End footer -->
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<!-- JS -->
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery.easing.1.3.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/SmoothScroll.js"></script>
+<script src="~/js/jquery.scrollTo.min.js"></script>
+<script src="~/js/jquery.localScroll.min.js"></script>
+<script src="~/js/jquery.viewport.mini.js"></script>
+<script src="~/js/jquery.countTo.js"></script>
+<script src="~/js/jquery.appear.js"></script>
+<script src="~/js/jquery.sticky.js"></script>
+<script src="~/js/jquery.parallax-1.1.3.js"></script>
+<script src="~/js/jquery.fitvids.js"></script>
+<script src="~/js/owl.carousel.min.js"></script>
+<script src="~/js/isotope.pkgd.min.js"></script>
+<script src="~/js/imagesloaded.pkgd.min.js"></script>
+<script src="~/js/jquery.magnific-popup.min.js"></script>
+<script src="~/js/wow.min.js"></script>
+<script src="~/js/masonry.pkgd.min.js"></script>
+<script src="~/js/morphext.js"></script>
+<script src="~/js/jquery.lazyload.min.js"></script>
+<script src="~/js/all.js"></script>
+<script src="~/js/contact-form.js"></script>
+<script src="~/js/jquery.ajaxchimp.min.js"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</html>

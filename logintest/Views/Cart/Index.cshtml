@@ -1,0 +1,140 @@
+﻿@model logintest.Models.Cart
+
+
+<body class="appear-animate" style="background-color:white">
+
+
+
+    <main id="main">
+
+
+        <!-- Head Section -->
+        <section class="page-section bg-dark-alfa-50 parallax-3" data-background="/images/banners/banner.jpg">
+
+            <div class="relative container align-left">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">SHOPPING CART</h1>
+                        <div class="hs-line-4 font-alt">
+                            GPUs that are beyond fast for gamers and creators
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </section>
+        <!-- End Head Section -->
+        <!-- Section -->
+        <section class="page-section">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+                        @if (Model.CartItems.Count > 0)
+                            {
+                        <div class="table-responsive">
+                            <table class="table table-striped shopping-cart-table">
+                                <tr>
+                                    <th>
+                                            <center>Product Image</center>
+                                    </th>
+                                    <th>
+                                            <center>Product Name</center>
+                                    </th>
+                                    <th>
+                                            <center> Q-ty</center>
+                                    </th>
+                                    <th>
+                                            <center>Total</center>
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                                @foreach (var item in Model.CartItems)
+                                    {
+                                            var Total = item.image.ProductPrice * item.Quantity;
+                                <tr>
+                                    <td>
+                                                <center><a asp-controller="Image" asp-action="Details" asp-route-id="@item.image.ProductId"><img src="@("~/image/"+@item.image.ProductImage)" asp-append-version="true" style="height:4em;"></a></center>
+                                    </td>
+                                    <td>
+                                                <center><a asp-controller="Image" asp-action="Details" asp-route-id="@item.image.ProductId">@item.image.ProductName</a></center>
+                                    </td>
+                                    <td>
+                                        <center><a asp-controller="Cart" asp-action="ReduceQuantity" asp-route-id="@item.image.ProductId"><i class="fa fa-minus"></i></a>
+                                        <span class="badge badge-primary"> @item.Quantity</span>
+                                                    <a asp-controller="Cart" asp-action="IncreaseQuantity" asp-route-id="@item.image.ProductId"><i class="fa fa-plus"></i></a>
+                                                </center>
+                                    </td>
+                                    <td>
+                                                <center>@Total.ToString("c")</center>
+                                    </td>
+                                    <td>                                    
+                                                <center><a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.image.ProductId" class="text-danger"><i class="fa fa-times"></i><span class="d-none d-sm-inline-block">Remove</span></a></center>
+                                    </td>
+                                </tr>  
+                                }
+                            </table>
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                
+                            </div>
+                            <div class="col-sm-4 text align-right">
+                                <div>
+                                        <a class="btn btn-mod btn-gray btn-round btn-small btn-danger" asp-controller="Cart" asp-action="ClearCart"><i class="fa fa-trash-o"></i> Emty Cart</a>
+                                        &nbsp;&nbsp;&nbsp;
+                                        <a class="btn btn-mod btn-gray btn-round btn-small" asp-controller="Cart" asp-action="Index">Update Cart</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <hr class="mt-10 mb-60" />
+
+                        <div class="row">
+                            <div class="col-sm-6">
+
+                                
+
+                                
+
+                            </div>
+                            <div class="col-sm-6 text align-right pt-10">
+
+
+                                <div class="lead mt-0 mb-30">
+                                    Order Total: <strong><strong>@Model?.GetCartTotal().ToString("c")</strong></strong>
+                                </div>
+
+                                <div>
+                                    <a asp-controller="Order" asp-action="Shipping" class="btn btn-mod btn-round btn-large btn-success">Proceed to Shipping</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        }
+                        else
+                        {
+                            <h3 class="text-center">Cart is empty</h3>
+                        }
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- End Section -->
+
+    </main>
+   
+</body>

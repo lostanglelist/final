@@ -1,0 +1,45 @@
+﻿@model logintest.Models.Order
+
+<body class="appear-animate" style="background-color:white">
+
+
+
+<main id="main">
+
+
+    <!-- Head Section -->
+    <section class="page-section bg-dark-alfa-50 parallax-3" data-background="/images/banners/banner.jpg">
+
+        <div class="relative container align-left">
+
+            <div class="row">
+
+                <div class="col-md-8">
+                    <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">confirm your purchase</h1>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </section>
+    <!-- End Head Section -->
+    <section class="page-section">
+        <div class="container relative">
+                <form asp-action="CheckOut" method="post" class="form-horizontal" role="form">
+                    <h4 class="hs-line-11 font-alt mb-20 mb-xs-0">PLEASE CONFIRM YOUR PURCHASE.</h4>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-5">
+                            <input type="submit" class="btn btn-mod btn-round btn-large btn-success" style="background-color:#222222e6; color:white;" value="Complete Order" />
+
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </section>
+
+</main>
+</body>
